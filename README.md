@@ -6,7 +6,13 @@ We provide the IWPOD-NET newtwork model and the pre-trained weights described in
 
 ## Running a simple test
 
+The basic usage is
+
+python example_plate_detection.py --image [image name] --vtype [vehicle type] --lp_threshold [detection threshold]
+
+You can run a simple test based on the provided images.
+
+```
 python example_plate_detection.py --image images\example_aolp_fullimage.jpg --vtype fullimage
-
 python example_plate_detection.py --image images\example_bike.jpg --vtype bike
-
+```
