@@ -6,6 +6,7 @@ This repository contains the IWPOD-NET newtwork model and the pre-trained weight
 Some examples based on (the few) provided images:
 
 python example_plate_detection.py --image images\example_aolp_fullimage.jpg --vtype fullimage
+
 python example_plate_detection.py --image images\example_bike.jpg --vtype bike
 
 
