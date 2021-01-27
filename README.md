@@ -9,6 +9,3 @@ python example_plate_detection.py --image images\example_aolp_fullimage.jpg --vt
 
 python example_plate_detection.py --image images\example_bike.jpg --vtype bike
 
-
-
-
