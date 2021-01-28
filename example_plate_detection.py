@@ -4,15 +4,25 @@ import cv2
 from src.keras_utils import  detect_lp_width
 from src.utils 					import  im2single
 from src.drawing_utils			import draw_losangle
+import argparse
 
 
 
 if __name__ == '__main__':
 
+	parser = argparse.ArgumentParser()
+	parser.add_argument('-i' 		,'--image'			,type=str   , default = 'images\\example_aolp_fullimage.jpg'		,help='Input Image')
+	parser.add_argument('-v' 		,'--vtype'			,type=str   , default = 'fullimage'		,help = 'Image type (car, truck, bus, bike or fullimage)')
+	parser.add_argument('-t' 		,'--lp_threshold'	,type=float   , default = 0.35		,help = 'Detection Threshold')
+
+	#parser.add_argument('-tr'		,'--train-dir'		,type=str   , required=True		,help='Input data directory for training')
+	args = parser.parse_args()
+
 	#
 	#  Parameters of the method
 	#
-	lp_threshold = 0.35 # detection threshold
+	#lp_threshold = 0.35 # detection threshold
+	lp_threshold = args.lp_threshold
 	ocr_input_size = [80, 240] # desired LP size (width x height)
 	
 	#
@@ -35,10 +45,9 @@ if __name__ == '__main__':
 	#
 	#
 
-	Ivehicle = cv2.imread('images\\example_fullimage.jpg')
-#	Ivehicle = cv2.imread('images\\brasil7.jpg')
+	Ivehicle = cv2.imread(args.image)
+	vtype = args.vtype
 	iwh = np.array(Ivehicle.shape[1::-1],dtype=float).reshape((2,1))
-	vtype = 'fullimage' # indicates vehicle type (typically comes from the vehicle detector)
 
 	if (vtype in ['car', 'bus', 'truck']):
 		#
@@ -68,9 +77,18 @@ if __name__ == '__main__':
 	#
 	Llp, LlpImgs,_ = detect_lp_width(iwpod_net, im2single(Ivehicle), WPODResolution*ASPECTRATIO, 2**4, lp_output_resolution, lp_threshold)
 	for i, img in enumerate(LlpImgs):
+		#
+		#  Draws LP quadrilateral in input image
+		#
 		pts = Llp[i].pts * iwh
 		draw_losangle(Ivehicle, pts, color = (0,0,255.), thickness = 2)
+		#
+		#  Shows each detected LP
+		#
 		cv2.imshow('Rectified plate %d'%i, img )
+	#
+	#  Shows original image with deteced plates (quadrilateral)
+	#
 	cv2.imshow('Image and LPs', Ivehicle )
 	cv2.waitKey()
 	cv2.destroyAllWindows()
