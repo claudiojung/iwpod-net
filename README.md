@@ -16,3 +16,13 @@ You can run a simple test based on the provided images.
 python example_plate_detection.py --image images\example_aolp_fullimage.jpg --vtype fullimage
 python example_plate_detection.py --image images\example_bike.jpg --vtype bike
 ```
+
+## Training the model (new)
+
+You can also train your model from scratch or fine-tune a pre-trained model. In the paper we used a per-batch training strategy (in TF1), but this repository provides a per-epoch training strategy (in TF2). The main function for training a model is
+
+train_iwpodnet_tf2.py [-h] [-md MODEL_DIR] [-cm CUR_MODEL] [-n NAME] [-tr TRAIN_DIR] [-e EPOCHS] [-bs BATCH_SIZE] [-lr LEARNING_RATE] [-se SAVE_EPOCHS]
+
+We provide a few annotated samples in the directory train_dir, all of them extracted from the CCPD dataset (https://github.com/detectRecog/CCPD). The annotation file contains the (relative) locations of the four LP corners -- you can find an annotation tool in the repo of our previous ECCV paper (https://github.com/sergiomsilva/alpr-unconstrained). In the folder bgimages you can add images without LPs, which are used in the data augmentation procedure to reduce the number of false positives.
+
+
