@@ -34,5 +34,5 @@ python train_iwpodnet_tf2.py -md weights -n my_trained_iwpodnet -tr train_dir -e
 ```
 to train a model from scracth for 20.000 epochs, batch-size 64 and initial learning rate of 1e-3, saving intermediate checkpoints every 5.000 epochs.
 
-We provide a few annotated samples in the directory train_dir, all of them extracted from the CCPD dataset (https://github.com/detectRecog/CCPD). The annotation file contains the (relative) locations of the four LP corners -- you can find an annotation tool in the repo of our previous ECCV paper (https://github.com/sergiomsilva/alpr-unconstrained). In the folder bgimages you can add images without LPs, which are used in the data augmentation procedure to reduce the number of false positives.
+We provide a few annotated samples in the directory *train_dir*, all of them extracted from the CCPD dataset (https://github.com/detectRecog/CCPD). The annotation files contain the (relative) locations of the four LP corners -- you can find an annotation tool in the repo of our previous ECCV paper (https://github.com/sergiomsilva/alpr-unconstrained). In the folder *bgimages* you can add images without LPs, which are used in the data augmentation procedure to reduce the number of false positives. The folder *weights* is the default directory for loading/storing models and weights.
 
